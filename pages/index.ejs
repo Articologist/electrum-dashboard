@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+
+    <title>Dashboard</title>
+  </head>
+  <body>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="/"><%= domain %></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="/unspent">Unspent</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container-xxl mt-5">
+      <div class="row">
+        <div class="col-12 p-3">
+          <p class="h1">Dashboard</p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-3">
+          <div class="card">
+            <div class="card-body">
+              <h3 class="card-title">
+                Blockchain Height
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" style="float: right" class="bi bi-share" viewBox="0 0 16 16">
+                  <path d="M13.5 1a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zM11 2.5a2.5 2.5 0 1 1 .603 1.628l-6.718 3.12a2.499 2.499 0 0 1 0 1.504l6.718 3.12a2.5 2.5 0 1 1-.488.876l-6.718-3.12a2.5 2.5 0 1 1 0-3.256l6.718-3.12A2.5 2.5 0 0 1 11 2.5zm-8.5 4a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zm11 5.5a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3z"/>
+                </svg>
+              </h3>
+              <p class="card-text fs-4"><%= blockchain_height %></p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="card">
+            <div class="card-body">
+              <h3 class="card-title">
+                Server Height
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" style="float: right" class="bi bi-hdd-rack" viewBox="0 0 16 16">
+                  <path d="M4.5 5a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1zM3 4.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0zm2 7a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0zm-2.5.5a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1z"/>
+                  <path d="M2 2a2 2 0 0 0-2 2v1a2 2 0 0 0 2 2h1v2H2a2 2 0 0 0-2 2v1a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-1a2 2 0 0 0-2-2h-1V7h1a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H2zm13 2v1a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1zm0 7v1a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1v-1a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1zm-3-4v2H4V7h8z"/>
+                </svg>
+              </h3>
+              <p class="card-text fs-4"><%= server_height %></p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="card">
+            <div class="card-body">
+              <h3 class="card-title">
+                Electrum Version
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" style="float: right" class="bi bi-box" viewBox="0 0 16 16">
+                  <path d="M8.186 1.113a.5.5 0 0 0-.372 0L1.846 3.5 8 5.961 14.154 3.5 8.186 1.113zM15 4.239l-6.5 2.6v7.922l6.5-2.6V4.24zM7.5 14.762V6.838L1 4.239v7.923l6.5 2.6zM7.443.184a1.5 1.5 0 0 1 1.114 0l7.129 2.852A.5.5 0 0 1 16 3.5v8.662a1 1 0 0 1-.629.928l-7.185 2.874a.5.5 0 0 1-.372 0L.63 13.09a1 1 0 0 1-.63-.928V3.5a.5.5 0 0 1 .314-.464L7.443.184z"/>
+                </svg>
+              </h3>
+              <p class="card-text fs-4"><%= version %></p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="card">
+            <div class="card-body">
+              <h3 class="card-title">
+                Fee per KB
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" style="float: right" class="bi bi-file-earmark-arrow-up" viewBox="0 0 16 16">
+                  <path d="M8.5 11.5a.5.5 0 0 1-1 0V7.707L6.354 8.854a.5.5 0 1 1-.708-.708l2-2a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1-.708.708L8.5 7.707V11.5z"/>
+                  <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5v2z"/>
+                </svg>
+              </h3>
+              <p class="card-text fs-4"><%= fee_per_kb %></p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row mt-4">
+        <div class="col-md-3">
+          <div class="card">
+            <div class="card-body">
+              <div class="card-body">
+                <canvas id="balanceData"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-9">
+          <div class="card">
+            <div class="card-body">
+              <div class="card-body">
+                <h3 class="card-title mb-3">
+                  Details: <%= crypto %>
+                </h3>
+                <p>The wallet has <code><%= (parseFloat(confirmed)+parseFloat(unconfirmed)).toFixed(8) %></code> <%= crypto %></p>
+                <p>Electrum's located on the server <code><%= server %></code> with path <code><%= path %></code>, it has in total <code><%= spv_nodes %></code> spv_nodes.</p>
+                <p>Below a list with all public electrum servers can be found.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 mt-4">
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th scope="col">Server</th>
+                <th scope="col">Pruning</th>
+                <th scope="col">SSL</th>
+                <th scope="col">TCP</th>
+                <th scope="col">Version</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% for (let i = 0; i < servers.length; i++) { %>
+                <tr>
+                  <td><%= servers[i].host %></td>
+                  <td><%= servers[i].pruning %></td>
+                  <td><%= servers[i].ssl %></td>
+                  <td><%= servers[i].tcp %></td>
+                  <td><%= servers[i].version %></td>
+                </tr>
+             <% } %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+
+      
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+
+    <script>
+      const balanceData = {
+          labels: ["Confirmed", "Unconfirmed"],
+          datasets: [
+            {
+              backgroundColor: ["#2ecc71", "#e67e22"],
+              borderWidth: 0,
+              data: ["<%= confirmed %>", "<%= unconfirmed %>"]
+            }
+          ]
+      };
+
+      const balanceDataElement = document.getElementById("balanceData")
+      if (balanceDataElement) {
+        new Chart(balanceDataElement, {
+            type: "pie",
+            data: balanceData,
+            options: {
+              cutoutPercentage: 75,
+              legend: {
+                position: "bottom",
+                padding: 4,
+                labels: {
+                  pointStyle: "circle",
+                  usePointStyle:true
+                }
+              }
+            }
+        });
+      }
+    </script>
+  </body>
+</html>

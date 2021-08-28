@@ -1,0 +1,28 @@
+{
+  "name": "electrum-dashboard",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js",
+    "start:dev": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/danieleServadei/electrum-dashboard.git"
+  },
+  "author": "Daniele Servadei",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/danieleServadei/electrum-dashboard/issues"
+  },
+  "homepage": "https://github.com/danieleServadei/electrum-dashboard#readme",
+  "dependencies": {
+    "bitcoind-rpc": "^0.8.1",
+    "ejs": "^3.1.6",
+    "express": "^4.17.1",
+    "json-rpc-2.0": "^0.2.18",
+    "node-fetch": "^2.6.1"
+  }
+}
