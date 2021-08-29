@@ -38,7 +38,17 @@ const getCryptoShortened = (crypto) => {
   return cryptos[crypto]
 }
 
-[
+app.get("/", (req, res) => {
+  res.json({
+    "paths": [
+      "/bitcoin",
+      "/litecoin",
+      "/bitcoin-cash"
+    ]
+  })
+})
+
+void [
   "bitcoin",
   "litecoin",
   "bitcoin-cash"
