@@ -61,7 +61,8 @@ void [
     res.render("index", {
       domain: req.headers.host,
       ...getinfo,
-      ...getbalance,
+      confirmed: getbalance.confirmed ?? 0,
+      unconfirmed: getbalance.unconfirmed ?? 0,
       servers: Object.keys(getservers).map(host => {
         return {
           host,
