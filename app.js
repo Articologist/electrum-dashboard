@@ -54,15 +54,38 @@ void [
   "bitcoin-cash"
 ].forEach(crypto => {
   app.get(`/${crypto}`, async (req, res) => {
-    const getinfo = await rpcRequest({"jsonrpc": "1.0", "id":"curl", "method": "getinfo", "params": [] }, crypto)
-    const getbalance = await rpcRequest({"jsonrpc": "1.0", "id":"curl", "method": "getbalance", "params": [] }, crypto)
+    const {
+      path = "",
+      server = "0.0.0.0",
+      blockchain_height = 0,
+      server_height = 0,
+      connected = true,
+      version = "0.0.0",
+      default_wallet = "/",
+      fee_per_kb = 0,
+      spv_nodes = 0
+    } = await rpcRequest({"jsonrpc": "1.0", "id":"curl", "method": "getinfo", "params": [] }, crypto)
+
+    const {
+      confirmed = 0,
+      unconfirmed = 0
+    } = await rpcRequest({"jsonrpc": "1.0", "id":"curl", "method": "getbalance", "params": [] }, crypto)
+
     const getservers = await rpcRequest({"jsonrpc": "1.0", "id":"curl", "method": "getservers", "params": [] }, crypto)
 
     res.render("index", {
       domain: req.headers.host,
-      ...getinfo,
-      confirmed: getbalance.confirmed ?? 0,
-      unconfirmed: getbalance.unconfirmed ?? 0,
+      path,
+      server,
+      blockchain_height,
+      server_height,
+      connected,
+      version,
+      default_wallet,
+      spv_nodes,
+      fee_per_kb,
+      confirmed,
+      unconfirmed,
       servers: Object.keys(getservers).map(host => {
         return {
           host,
