@@ -10,9 +10,10 @@ const {
   rpcUser,
   rpcPassword,
   rpcHost,
-  rpcPort,
-  crypto
+  rpcPort
 } = process.env
+
+const crypto = process.env.crypto.toUpperCase()
 
 const rpcRequest = async (body) => {
   const response = await fetch(`http://${rpcUser}:${rpcPassword}@${rpcHost}:${rpcPort}`, {
