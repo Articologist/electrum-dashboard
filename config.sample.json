@@ -1,0 +1,20 @@
+{
+  "bitcoin": {
+    "rpcUser": "user",
+    "rpcPassword": "password",
+    "rpcPort": 3000,
+    "rpcHost": "127.0.0.1"
+  },
+  "litecoin": {
+    "rpcUser": "user",
+    "rpcPassword": "password",
+    "rpcPort": 3000,
+    "rpcHost": "127.0.0.1"
+  },
+  "bitcoin-cash": {
+    "rpcUser": "user",
+    "rpcPassword": "password",
+    "rpcPort": 3000,
+    "rpcHost": "127.0.0.1"
+  }
+}
