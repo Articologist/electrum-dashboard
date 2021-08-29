@@ -81,8 +81,8 @@ void [
 
     res.render("unspent", {
       domain: req.headers.host,
-      total: listunspent.reduce((acc, { value }) => acc+parseFloat(value), 0),
-      listunspent,
+      total: listunspent.length ? listunspent.reduce((acc, { value }) => acc+parseFloat(value), 0) : 0,
+      listunspent: listunspent.length ? listunspent : [],
       crypto: getCryptoShortened(crypto),
       basePath: crypto
     });

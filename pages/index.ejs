@@ -119,7 +119,7 @@
                 <h3 class="card-title mb-3">
                   Details
                 </h3>
-                <p>The wallet has <code><%= (parseFloat(confirmed)+parseFloat(unconfirmed)).toFixed(8) %></code> <%= crypto %></p>
+                <p>The wallet has <code><%= (parseFloat(confirmed ?? 0)+parseFloat(unconfirmed ?? 0)).toFixed(8) %></code> <%= crypto %></p>
                 <p>Electrum's located on the server <code><%= server %></code> with path <code><%= path %></code>, it has in total <code><%= spv_nodes %></code> spv_nodes.</p>
                 <p>Below a list with all public electrum servers can be found.</p>
               </div>
