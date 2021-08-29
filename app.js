@@ -9,12 +9,13 @@ app.set("view engine", "ejs")
 const {
   rpcUser,
   rpcPassword,
+  rpcHost,
   rpcPort,
   crypto
 } = process.env
 
 const rpcRequest = async (body) => {
-  const response = await fetch(`http://${rpcUser}:${rpcPassword}@localhost:${rpcPort}`, {
+  const response = await fetch(`http://${rpcUser}:${rpcPassword}@${rpcHost}:${rpcPort}`, {
     method: "POST",
     headers: {
       "Content-Type": "text/plain"
