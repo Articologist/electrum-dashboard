@@ -26,7 +26,7 @@ const rpcRequest = async (body, crypto) => {
   })
   const json = JSON.parse(await response.text())
   console.log(json)
-  return json.result
+  return json.result ?? {}
 }
 
 const getCryptoShortened = (crypto) => {
