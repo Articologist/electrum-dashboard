@@ -1,0 +1,19 @@
+body {
+  padding-top: 40px;
+}
+
+.page-item.active .page-link {
+  background-color: #2c3e50;
+  border-color: #2c3e50;
+  color: #fff;
+}
+.page-link {
+  color: #2c3e50;
+}
+.page-link:hover {
+  color: #2c3e50;
+}
+.page-link:focus {
+  color: #2c3e50;
+  box-shadow: 0 0 0 0.2rem rgb(34 34 35 / 25%);
+}
