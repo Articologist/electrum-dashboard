@@ -16,5 +16,18 @@
     "rpcPassword": "password",
     "rpcPort": 3000,
     "rpcHost": "127.0.0.1"
+  },
+  "ethereum": {
+    "etherscanApiKey": "demo",
+    "addresses": [
+      {
+        "address": "demo",
+        "label": "demo"
+      },
+      {
+        "address": "demo",
+        "label": "demo"
+      }
+    ]
   }
 }
