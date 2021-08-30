@@ -59,7 +59,7 @@ const ethereumGetDashboardDetails = async () => {
   const transactionsReceived = []
 
   results.forEach(r => {
-    const { result } = JSON.parse(r)
+    const { result = [] } = JSON.parse(r)
     result.forEach(transaction => {
       if (addressList.indexOf(transaction.to) > -1) {
         transactionsReceived.push(transaction)
