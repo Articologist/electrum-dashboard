@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <link href="https://cdn.datatables.net/1.11.0/css/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css" rel="stylesheet">
+
+    <title>Ethereum</title>
+  </head>
+  <body>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="javascript:void()"><%= domain %></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Switch Crypto
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li><a class="dropdown-item" href="/bitcoin">Bitcoin</a></li>
+                <li><a class="dropdown-item" href="/litecoin">Litecoin</a></li>
+                <li><a class="dropdown-item" href="/bitcoin-cash">Bitcoin Cash</a></li>
+                <li><a class="dropdown-item" href="/ethereum">Ethereum</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container-xxl mt-5">
+      <div class="row">
+        <div class="col-12 p-3">
+          <p class="h1">Dashboard <%= crypto %></p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-3">
+          <div class="card">
+            <div class="card-body">
+              <h3 class="card-title">
+                Addresses
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" style="float: right" class="bi bi-archive" viewBox="0 0 16 16">
+                  <path d="M0 2a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1v7.5a2.5 2.5 0 0 1-2.5 2.5h-9A2.5 2.5 0 0 1 1 12.5V5a1 1 0 0 1-1-1V2zm2 3v7.5A1.5 1.5 0 0 0 3.5 14h9a1.5 1.5 0 0 0 1.5-1.5V5H2zm13-3H1v2h14V2zM5 7.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5z"/>
+                </svg>
+              </h3>
+              <p class="card-text fs-4"><%= addresses.length %></p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="card">
+            <div class="card-body">
+              <h3 class="card-title">
+                Labels
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" style="float: right" class="bi bi-tag" viewBox="0 0 16 16">
+                  <path d="M6 4.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm-1 0a.5.5 0 1 0-1 0 .5.5 0 0 0 1 0z"/>
+                  <path d="M2 1h4.586a1 1 0 0 1 .707.293l7 7a1 1 0 0 1 0 1.414l-4.586 4.586a1 1 0 0 1-1.414 0l-7-7A1 1 0 0 1 1 6.586V2a1 1 0 0 1 1-1zm0 5.586 7 7L13.586 9l-7-7H2v4.586z"/>
+                </svg>
+              </h3>
+              <p class="card-text fs-4"><%= addresses.map(a => a.label).join(", ") %></p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="card">
+            <div class="card-body">
+              <h3 class="card-title">
+                Balance
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" style="float: right" class="bi bi-bank" viewBox="0 0 16 16">
+                  <path d="M8 .95 14.61 4h.89a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5H15v7a.5.5 0 0 1 .485.379l.5 2A.5.5 0 0 1 15.5 17H.5a.5.5 0 0 1-.485-.621l.5-2A.5.5 0 0 1 1 14V7H.5a.5.5 0 0 1-.5-.5v-2A.5.5 0 0 1 .5 4h.89L8 .95zM3.776 4h8.447L8 2.05 3.776 4zM2 7v7h1V7H2zm2 0v7h2.5V7H4zm3.5 0v7h1V7h-1zm2 0v7H12V7H9.5zM13 7v7h1V7h-1zm2-1V5H1v1h14zm-.39 9H1.39l-.25 1h13.72l-.25-1z"/>
+                </svg>
+              </h3>
+              <p class="card-text fs-4"><%= Object.values(balances).reduce((acc, val) => acc+val) %></p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="card">
+            <div class="card-body">
+              <h3 class="card-title">
+                Transactions
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" style="float: right" class="bi bi-list-task" viewBox="0 0 16 16">
+                  <path fill-rule="evenodd" d="M2 2.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5V3a.5.5 0 0 0-.5-.5H2zM3 3H2v1h1V3z"/>
+                  <path d="M5 3.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zM5.5 7a.5.5 0 0 0 0 1h9a.5.5 0 0 0 0-1h-9zm0 4a.5.5 0 0 0 0 1h9a.5.5 0 0 0 0-1h-9z"/>
+                  <path fill-rule="evenodd" d="M1.5 7a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H2a.5.5 0 0 1-.5-.5V7zM2 7h1v1H2V7zm0 3.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5H2zm1 .5H2v1h1v-1z"/>
+                </svg>
+              </h3>
+              <p class="card-text fs-4"><%= transactionsReceived.length %></p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row mt-4">
+        <div class="col-md-3">
+          <div class="card">
+            <div class="card-body">
+              <div class="card-body">
+                <canvas id="balanceData"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-9">
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th scope="col">Label</th>
+                <th scope="col">Address</th>
+                <th scope="col">Balance</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% for (const [key, value] of Object.entries(balances)) { %>
+                <tr>
+                  <td><%= addresses.find(a => a.address === key).label %></td>
+                  <td><%= key %></td>
+                  <td><%= value %></td>
+                </tr>
+             <% } %>
+            </tbody>
+          </table>
+        </div>
+        <div class="col-12 mt-4 mb-4">
+          <table class="table table-bordered" id="transactionsReceived">
+            <thead>
+              <tr>
+                <th scope="col">Hash</th>
+                <th scope="col">To</th>
+                <th scope="col">Value</th>
+                <th scope="col">Confirmations</th>
+                <th scope="col">Date</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% for (let i = 0; i < transactionsReceived.length; i++) { %>
+                <tr>
+                  <td><%= transactionsReceived[i].hash %></td>
+                  <td><%= transactionsReceived[i].to %></td>
+                  <td><%= parseFloat(transactionsReceived[i].value)/1000000000000000000 %></td>
+                  <td><%= transactionsReceived[i].confirmations %></td>
+                  <td><%= new Date(transactionsReceived[i].timeStamp * 1000).toISOString().slice(0, 19).replace('T', ' ') %></td>
+                </tr>
+             <% } %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+
+      
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.11.0/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.0/js/dataTables.bootstrap4.min.js"></script>
+
+    <script>
+      $(document).ready(() => {
+        $('#transactionsReceived').DataTable()
+      })
+    </script>
+
+    <script>
+      const balanceData = {
+          labels: ["<%= addresses[0].label %>", "<%= addresses[1].label %>"],
+          datasets: [
+            {
+              backgroundColor: ["#3498db", "#9b59b6"],
+              borderWidth: 0,
+              data: ["<%= balances[addresses[0].address] %>", "<%= balances[addresses[1].address] %>"]
+            }
+          ]
+      };
+
+      const balanceDataElement = document.getElementById("balanceData")
+      if (balanceDataElement) {
+        new Chart(balanceDataElement, {
+            type: "pie",
+            data: balanceData,
+            options: {
+              cutoutPercentage: 75,
+              legend: {
+                position: "bottom",
+                padding: 4,
+                labels: {
+                  pointStyle: "circle",
+                  usePointStyle:true
+                }
+              }
+            }
+        });
+      }
+    </script>
+  </body>
+</html>

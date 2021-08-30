@@ -29,11 +29,57 @@ const rpcRequest = async (body, crypto) => {
   return json.result ?? {}
 }
 
+const ethereumGetDashboardDetails = async () => {
+  const {
+    etherscanApiKey,
+    addresses
+  } = config.ethereum
+
+  const addressList = addresses.map(a => a.address)
+
+  const balanceResponse = await fetch(`https://api.etherscan.io/api?module=account&action=balancemulti&address=${addressList.join(",")}&tag=latest&apikey=${etherscanApiKey}`)
+  const { result: balanceResult } = JSON.parse(await balanceResponse.text())
+  const balances = {}
+  addresses.forEach(({ address }) => {
+    balances[address] = parseFloat(balanceResult.find(e => e.account === address).balance)/1000000000000000000
+  })
+  
+  console.log(balances)
+  
+  const promises = []
+
+  addresses.forEach(({ address }) => {
+    promises.push(fetch(`https://api.etherscan.io/api?module=account&action=txlist&address=${address}&startblock=0&endblock=99999999&sort=desc&apikey=${etherscanApiKey}`))
+    promises.push(fetch(`https://api.etherscan.io/api?module=account&action=txlistinternal&address=${address}&startblock=0&endblock=99999999&sort=desc&apikey=${etherscanApiKey}`))
+  })
+
+  const responses = await Promise.all(promises)
+  const results = await Promise.all(responses.map(r => r.text()))
+
+  const transactionsReceived = []
+
+  results.forEach(r => {
+    const { result } = JSON.parse(r)
+    result.forEach(transaction => {
+      if (addressList.indexOf(transaction.to) > -1) {
+        transactionsReceived.push(transaction)
+      }
+    })
+  })
+
+  return {
+    addresses,
+    balances,
+    transactionsReceived
+  }
+}
+
 const getCryptoShortened = (crypto) => {
   const cryptos = {
     "bitcoin": "BTC",
     "litecoin": "LTC",
-    "bitcoin-cash": "BCH"
+    "bitcoin-cash": "BCH",
+    "ethereum": "ETH"
   }
   return cryptos[crypto]
 }
@@ -43,7 +89,8 @@ app.get("/", (req, res) => {
     "paths": [
       "/bitcoin",
       "/litecoin",
-      "/bitcoin-cash"
+      "/bitcoin-cash",
+      "/ethereum"
     ]
   })
 })
@@ -111,6 +158,23 @@ void [
       basePath: crypto
     });
   })
+})
+
+app.get("/ethereum", async (req, res) => {
+  const {
+    addresses,
+    balances,
+    transactionsReceived
+  } = await ethereumGetDashboardDetails()
+
+  res.render("ethereum", {
+    domain: req.headers.host,
+    addresses,
+    balances,
+    transactionsReceived,
+    crypto: getCryptoShortened("ethereum"),
+    basePath: "ethereum"
+  });
 })
 
 const port = process.env.port || 3000
