@@ -85,15 +85,47 @@ const getCryptoShortened = (crypto) => {
   return cryptos[crypto]
 }
 
-app.get("/", (req, res) => {
-  res.json({
-    "paths": [
-      "/bitcoin",
-      "/litecoin",
-      "/bitcoin-cash",
-      "/ethereum"
-    ]
-  })
+app.get("/", async (req, res) => {
+  const {
+    confirmed: btcConfirmed = 0,
+    unconfirmed: btcUnconfirmed = 0
+  } = await rpcRequest({"jsonrpc": "1.0", "id":"curl", "method": "getbalance", "params": [] }, "bitcoin")
+  const btc = Number((parseFloat(btcConfirmed)+parseFloat(btcUnconfirmed)).toFixed(10));
+
+  const {
+    confirmed: ltcConfirmed = 0,
+    unconfirmed: ltcUnconfirmed = 0
+  } = await rpcRequest({"jsonrpc": "1.0", "id":"curl", "method": "getbalance", "params": [] }, "litecoin")
+  const ltc = Number((parseFloat(ltcConfirmed)+parseFloat(ltcUnconfirmed)).toFixed(10));
+
+  const {
+    confirmed: bchConfirmed = 0,
+    unconfirmed: bchUnconfirmed = 0
+  } = await rpcRequest({"jsonrpc": "1.0", "id":"curl", "method": "getbalance", "params": [] }, "bitcoin-cash")
+  const bch = Number((parseFloat(bchConfirmed)+parseFloat(bchUnconfirmed)).toFixed(10));
+
+  const { balances } = await ethereumGetDashboardDetails()
+
+  const eth = Number((Object.entries(balances).reduce((acc, val) => acc+val[1], 0)).toFixed(10))
+
+  const btcUsd = Number((JSON.parse(await (await fetch("https://blockchain.info/ticker")).text()).USD.last * btc).toFixed(2))
+  const ltcUsd = Number((JSON.parse(await (await fetch("https://cex.io/api/ticker/LTC/USD")).text()).last * ltc).toFixed(2))
+  const bchUsd = Number((JSON.parse(await (await fetch("https://cex.io/api/ticker/BCH/USD")).text()).last * bch).toFixed(2))
+  const ethUsd = Number((JSON.parse(await (await fetch("https://cex.io/api/ticker/ETH/USD")).text()).last * eth).toFixed(2))
+  const totalUsd = (btcUsd+ltcUsd+bchUsd+ethUsd).toFixed(2)
+
+  res.render("landing", {
+    domain: req.headers.host,
+    btc,
+    btcUsd,
+    ltc,
+    ltcUsd,
+    bch,
+    bchUsd,
+    eth,
+    ethUsd,
+    totalUsd
+  });
 })
 
 void [
