@@ -115,7 +115,9 @@ app.get("/", async (req, res) => {
     body: JSON.stringify({ "jsonrpc": "2.0", "id": 1, "method": "getBalance", "params": [config.solana.address] })
   })
   const solJson = JSON.parse(await solResponse.text())
+  console.log(solJson)
   const sol = solJson.result.value/1000000000
+  console.log(sol)
 
   const xrpResponse = await fetch(config.ripple.endpoint, {
     method: "POST",
@@ -123,16 +125,21 @@ app.get("/", async (req, res) => {
       "Content-Type": "application/json"
     },
     body: JSON.stringify({
-      "id": 2,
-      "command": "account_info",
-      "account": config.ripple.address,
-      "strict": true,
-      "ledger_index": "current",
-      "queue": true
+      "method": "account_info",
+      "params": [
+        {
+          "account": config.ripple.address,
+          "strict": true,
+          "ledger_index": "current",
+          "queue": true
+        }
+      ]
     })
   })
   const xrpJson = JSON.parse(await xrpResponse.text())
+  console.log(xrpJson)
   const xrp = xrpJson.result.account_data.Balance/1000000
+  console.log(xrp)
 
   const nanoResponse = await fetch(`https://api.nanocrawler.cc/v2/accounts/${config.nano.address}`, {
     method: "GET",
@@ -141,7 +148,9 @@ app.get("/", async (req, res) => {
     }
   })
   const nanoJson = JSON.parse(await nanoResponse.text())
-  const nano = nanoJson.account.balance/1e30
+  console.log(nanoJson)
+  const nano = nanoJson.error ? 0 : nanoJson.account.balance/1e30
+  console.log(nano)
 
   const xmrResponse = await fetch("https://api.sellix.io/v1/admin/monero/balance", {
     method: "GET",
@@ -150,7 +159,9 @@ app.get("/", async (req, res) => {
     }
   })
   const xmrJson = JSON.parse(await xmrResponse.text())
+  console.log(xmrJson)
   const xmr = xmrJson.data.balance/1e12
+  console.log(xmr)
 
   const btcUsd = Number((JSON.parse(await (await fetch("https://blockchain.info/ticker")).text()).USD.last * btc).toFixed(2))
   const ltcUsd = Number((JSON.parse(await (await fetch("https://cex.io/api/ticker/LTC/USD")).text()).last * ltc).toFixed(2))
@@ -158,8 +169,8 @@ app.get("/", async (req, res) => {
   const ethUsd = Number((JSON.parse(await (await fetch("https://cex.io/api/ticker/ETH/USD")).text()).last * eth).toFixed(2))
   const solUsd = Number((JSON.parse(await (await fetch("https://cex.io/api/ticker/SOL/USD")).text()).last * sol).toFixed(2))
   const xrpUsd = Number((JSON.parse(await (await fetch("https://cex.io/api/ticker/XRP/USD")).text()).last * xrp).toFixed(2))
-  const xmrUsd = Number((JSON.parse(await (await fetch("https://cex.io/api/ticker/XMR/USD")).text()).last * xmr).toFixed(2))
-  const nanoUsd = Number((JSON.parse(await (await fetch("https://cex.io/api/ticker/NANO/USD")).text()).last * nano).toFixed(2))
+  const xmrUsd = Number((JSON.parse(await (await fetch("https://min-api.cryptocompare.com/data/price?fsym=XMR&tsyms=USD")).text()).USD * xmr).toFixed(2))
+  const nanoUsd = Number((JSON.parse(await (await fetch("https://min-api.cryptocompare.com/data/price?fsym=NANO&tsyms=USD")).text()).USD * nano).toFixed(2))
   const totalUsd = (btcUsd+ltcUsd+bchUsd+ethUsd+solUsd+xmrUsd+xrpUsd+nanoUsd).toFixed(2)
 
   res.render("landing", {
@@ -172,6 +183,14 @@ app.get("/", async (req, res) => {
     bchUsd,
     eth,
     ethUsd,
+    sol,
+    solUsd,
+    nano,
+    nanoUsd,
+    xrp,
+    xrpUsd,
+    xmr,
+    xmrUsd,
     totalUsd
   });
 })
